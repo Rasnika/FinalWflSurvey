@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.QuestionEntity;
 import com.example.demo.entity.UserEntity;
+import com.example.demo.entity.UserResponseEntity;
 import com.example.demo.repository.UserEntityRepo;
+import com.example.demo.repository.UserResponseRepo;
 import com.example.demo.service.QuestionEntityService;
 import com.example.demo.service.UserEntityService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -34,13 +36,15 @@ public class Controller {
 	UserEntityRepo urepo;
 	
 	@Autowired
+	UserResponseRepo urespo;
+	@Autowired
 	UserEntityService us;
 	
 	@Autowired
 	QuestionEntityService Qeservice;
 	
 	@PostMapping(value="/ouath",consumes=MediaType.TEXT_PLAIN_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserEntity> gettoken(@RequestBody String token) throws Exception
+	public ResponseEntity<Integer> gettoken(@RequestBody String token) throws Exception
 	{
 		
 	    
@@ -55,11 +59,11 @@ public class Controller {
 	                 if(datacheck==null)
 	                 { 	 
 				    urepo.save(user);
-				    return new ResponseEntity<>(null,HttpStatus.OK);
+				    return new ResponseEntity<>(user.getUid(),HttpStatus.OK);
 	                 }
 	                 else
 	                 {
-	                	 return new ResponseEntity<>(null,HttpStatus.OK);
+	                	 return new ResponseEntity<>(user.getUid(),HttpStatus.OK);
 	                 }
 				    
 				   
@@ -72,6 +76,18 @@ public class Controller {
     	QuestionEntity questns = Qeservice.getQuestionsfromTable();
         return new ResponseEntity<>(questns, HttpStatus.OK);
     }
+	
+	@PostMapping(value="/userResponse/{uid}")
+		public ResponseEntity<String> storeResponses(@RequestBody UserResponseEntity uresponse)
+		{
+			
+			urespo.save(uresponse);
+			
+			return new ResponseEntity<>(null,HttpStatus.OK);
+		}
+		
+
+
 	
 	
 
