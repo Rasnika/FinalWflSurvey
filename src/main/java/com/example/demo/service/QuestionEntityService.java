@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.QuestionEntity;
+import java.util.List;
 
 public interface QuestionEntityService {
-	
 
-public QuestionEntity getQuestionsfromTable() throws Exception ;
-	}
+    List<QuestionEntity> getQuestionsfromTable() throws Exception;
+}
 
 

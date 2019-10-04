@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -10,6 +11,6 @@ public interface QuestionEntityRepo extends JpaRepository<QuestionEntity, Intege
 
 	
 	@Query(value="select q.qid,q.question,t.options from Question_Entity q, Question_Entity_options t where q.qid=t.question_entity_qid", nativeQuery = true)
-	QuestionEntity getQuestionsrepo();
+	List<QuestionEntity> getQuestionsrepo();
 }
 

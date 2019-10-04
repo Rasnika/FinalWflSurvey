@@ -4,6 +4,7 @@ package com.example.demo.implementation;
 	
 
 
+	import java.util.List;
 	import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.QuestionEntity;
@@ -21,11 +22,8 @@ import com.example.demo.service.QuestionEntityService;
 		}
 		
 		
-		public QuestionEntity getQuestionsfromTable() throws Exception {
-			
-			
-		QuestionEntity qe =repo.getQuestionsrepo();
-			return qe;
+		public List<QuestionEntity> getQuestionsfromTable() throws Exception {
+			return repo.getQuestionsrepo();
 		}
 
 	}
